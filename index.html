@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FastAPI Frontend</title>
+</head>
+<body>
+    <button id="getItemButton">Get Item</button>
+    <div id="itemResult"></div>
+
+    <script>
+        const getItemButton = document.getElementById('getItemButton');
+        const itemResult = document.getElementById('itemResult');
+
+        getItemButton.addEventListener('click', async () => {
+            const item_id = 1; // Replace with the desired item_id
+            const response = await fetch(`http://localhost:8000/get-item/${item_id}`);
+
+            if (response.status === 200) {
+                const data = await response.json();
+                const formattedData = JSON.stringify(data, null, 2);
+                itemResult.textContent = formattedData;
+            } else {
+                itemResult.textContent = 'Error fetching item';
+            }
+        });
+    </script>
+</body>
+</html>
